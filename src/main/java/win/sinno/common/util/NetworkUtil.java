@@ -18,9 +18,17 @@ import java.util.Enumeration;
  */
 public class NetworkUtil {
 
+    /**
+     * 获取主机名称
+     *
+     * @return
+     * @throws UnknownHostException
+     */
     public static String getHostName() throws UnknownHostException {
-        return InetAddress.getLocalHost().getHostName();
+        InetAddress inetAddress = InetAddress.getLocalHost();
+        return inetAddress.getHostName();
     }
+
 
     public static String getIpAdd() throws UnknownHostException {
         InetAddress inetAddress = InetAddress.getLocalHost();
