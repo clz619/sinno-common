@@ -261,6 +261,27 @@ public class ByteUtil {
     }
 
     /**
+     * just like System.arraycopy
+     *
+     * @param src
+     * @param srcOffset
+     * @param dest
+     * @param destOffset
+     * @param len
+     * @return
+     */
+    public static int arraycopy(byte[] src, int srcOffset, byte[] dest, int destOffset, int len) {
+
+        if (src == null || src.length == 0) {
+            return 0;
+        }
+
+        System.arraycopy(src, srcOffset, dest, destOffset, len);
+
+        return len;
+    }
+
+    /**
      * string copy 2 byte
      *
      * @param s

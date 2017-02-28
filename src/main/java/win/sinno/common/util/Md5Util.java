@@ -2,6 +2,8 @@ package win.sinno.common.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 唯一id生成器
@@ -22,6 +24,27 @@ public class Md5Util {
      */
     public static final char[] UPPER_HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
+
+    private static Map<Character, Integer> CHAR_INT_MAP = new HashMap<Character, Integer>();
+
+    static {
+        CHAR_INT_MAP.put('0', 0);
+        CHAR_INT_MAP.put('1', 1);
+        CHAR_INT_MAP.put('2', 2);
+        CHAR_INT_MAP.put('3', 3);
+        CHAR_INT_MAP.put('4', 4);
+        CHAR_INT_MAP.put('5', 5);
+        CHAR_INT_MAP.put('6', 6);
+        CHAR_INT_MAP.put('7', 7);
+        CHAR_INT_MAP.put('8', 8);
+        CHAR_INT_MAP.put('9', 9);
+        CHAR_INT_MAP.put('A', 10);
+        CHAR_INT_MAP.put('B', 11);
+        CHAR_INT_MAP.put('C', 12);
+        CHAR_INT_MAP.put('D', 13);
+        CHAR_INT_MAP.put('E', 14);
+        CHAR_INT_MAP.put('F', 15);
+    }
 
     /**
      * md5 byte
@@ -115,5 +138,22 @@ public class Md5Util {
         }
     }
 
+
+    public final static byte[] MD5Str2Byte(String md5Str) {
+
+        if (md5Str == null || md5Str.length() != 32) {
+            return null;
+        }
+        // 2 up
+        String upMd5Str = md5Str.toUpperCase();
+
+        byte[] bytes = new byte[16];
+
+        for (int i = 0, pos = 0; i < 32; i = i + 2, pos++) {
+            bytes[pos] = (byte) ((CHAR_INT_MAP.get(upMd5Str.charAt(i)) << 4) | CHAR_INT_MAP.get(upMd5Str.charAt(i + 1)));
+        }
+
+        return bytes;
+    }
 
 }

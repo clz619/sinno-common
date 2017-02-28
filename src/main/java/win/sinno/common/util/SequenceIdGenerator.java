@@ -12,16 +12,13 @@ import java.util.Map;
  */
 public class SequenceIdGenerator {
 
-    /**
-     * 当前id
-     */
+    private String name;
+
     private int curSeqId = 0;
 
     public static final int maxSeqId = Integer.MAX_VALUE;
 
     private static final Map<String, SequenceIdGenerator> CACHE = new HashMap<String, SequenceIdGenerator>();
-
-    private String name;
 
     public static SequenceIdGenerator getInstance(String name) {
 

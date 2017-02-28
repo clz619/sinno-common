@@ -27,4 +27,26 @@ public class MD5UtilTest {
         System.out.println(Md5Util.MD5(s));
         System.out.println(Md5Util.MD5(s, false));
     }
+
+    @Test
+    public void testMd5Str2Byte() {
+        String str = "123";
+        String a = Md5Util.MD5(str);
+        System.out.println(a);
+        byte[] bytes = Md5Util.MD5Str2Byte(a);
+
+        for (int i = 0; i < bytes.length; i++) {
+            System.out.print(bytes[i]);
+            System.out.print(" ");
+        }
+
+        System.out.println(" ");
+
+        bytes = Md5Util.MD5Byte(str);
+        for (int i = 0; i < bytes.length; i++) {
+            System.out.print(bytes[i]);
+            System.out.print(" ");
+        }
+
+    }
 }
