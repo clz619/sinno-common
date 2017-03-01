@@ -24,7 +24,9 @@ public class Md5Util {
      */
     public static final char[] UPPER_HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-
+    /**
+     * char int map
+     */
     private static Map<Character, Integer> CHAR_INT_MAP = new HashMap<Character, Integer>();
 
     static {
@@ -100,7 +102,6 @@ public class Md5Util {
      */
     public final static String MD5(String s, boolean isUpper) {
 
-
         try {
             byte[] btInput = s.getBytes();
 
@@ -110,28 +111,7 @@ public class Md5Util {
             // 获得密文
             byte[] md = mdInst.digest(btInput);
 
-            // 把密文转换成十六进制的字符串形式
-            int j = md.length;
-
-            char str[] = new char[j * 2];
-
-            int k = 0;
-
-            for (int i = 0; i < j; i++) {
-
-                byte byte0 = md[i];
-
-                if (isUpper) {
-                    str[k++] = UPPER_HEX_DIGITS[byte0 >>> 4 & 0xf];
-                    str[k++] = UPPER_HEX_DIGITS[byte0 & 0xf];
-                } else {
-                    str[k++] = LOWER_HEX_DIGITS[byte0 >>> 4 & 0xf];
-                    str[k++] = LOWER_HEX_DIGITS[byte0 & 0xf];
-                }
-
-            }
-
-            return new String(str);
+            return MD5Byte2Str(md);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -140,10 +120,10 @@ public class Md5Util {
 
 
     public final static byte[] MD5Str2Byte(String md5Str) {
-
         if (md5Str == null || md5Str.length() != 32) {
             return null;
         }
+
         // 2 up
         String upMd5Str = md5Str.toUpperCase();
 
@@ -154,6 +134,25 @@ public class Md5Util {
         }
 
         return bytes;
+    }
+
+    public static final String MD5Byte2Str(byte[] bytes) {
+        // 把密文转换成十六进制的字符串形式
+        int j = bytes.length;
+
+        char str[] = new char[j * 2];
+
+        int k = 0;
+
+        for (int i = 0; i < j; i++) {
+
+            byte byte0 = bytes[i];
+
+            str[k++] = UPPER_HEX_DIGITS[byte0 >>> 4 & 0xf];
+            str[k++] = UPPER_HEX_DIGITS[byte0 & 0xf];
+        }
+
+        return new String(str);
     }
 
 }

@@ -42,7 +42,7 @@ public class ByteUtil {
         return builder.toString();
     }
 
-    public static short byte2short(byte[] bytes) {
+    public static Short byte2short(byte[] bytes) {
 
         if (bytes.length != 2) {
             throw new IllegalArgumentException("bytes length:" + bytes.length + " can not format to short!");
@@ -54,7 +54,7 @@ public class ByteUtil {
                 ;
     }
 
-    public static short byte2short(byte[] bytes, int offset) {
+    public static Short byte2short(byte[] bytes, int offset) {
 
         if (bytes.length < offset + 2) {
             throw new IllegalArgumentException("bytes (length:" + bytes.length + ") < (offset:" + offset + ")+2 can not format to short!");
@@ -67,11 +67,11 @@ public class ByteUtil {
                 ;
     }
 
-    public static int byte2int(byte b) {
+    public static Integer byte2int(byte b) {
         return b & 0xff;
     }
 
-    public static int byte2int(byte[] bytes) {
+    public static Integer byte2int(byte[] bytes) {
 
         if (bytes.length != 4) {
             throw new IllegalArgumentException("bytes length:" + bytes.length + " can not format to int!");
@@ -91,7 +91,7 @@ public class ByteUtil {
      * @param offset
      * @return
      */
-    public static int byte2int(byte[] bytes, int offset) {
+    public static Integer byte2int(byte[] bytes, int offset) {
 
         if (bytes.length < offset + 4) {
             throw new IllegalArgumentException("bytes (length:" + bytes.length + ") < (offset:" + offset + ")+4 can not format to int!");
@@ -104,7 +104,7 @@ public class ByteUtil {
                 ;
     }
 
-    public static long byte2long(byte[] bytes) {
+    public static Long byte2long(byte[] bytes) {
 
         if (bytes.length != 8) {
             throw new IllegalArgumentException("bytes length:" + bytes.length + " can not format to long!");
@@ -121,7 +121,7 @@ public class ByteUtil {
                 ;
     }
 
-    public static long byte2long(byte[] bytes, int offset) {
+    public static Long byte2long(byte[] bytes, int offset) {
 
         if (bytes.length < offset + 8) {
             throw new IllegalArgumentException("bytes (length:" + bytes.length + ") < (offset:" + offset + ")+8 can not format to long!");
@@ -237,7 +237,7 @@ public class ByteUtil {
      * @param destOffset
      * @return
      */
-    public static int arraycopy(byte[] src, byte[] dest, int destOffset) {
+    public static Integer arraycopy(byte[] src, byte[] dest, int destOffset) {
         return arraycopy(src, 0, dest, destOffset);
     }
 
@@ -250,7 +250,7 @@ public class ByteUtil {
      * @param destOffset
      * @return
      */
-    public static int arraycopy(byte[] src, int srcOffset, byte[] dest, int destOffset) {
+    public static Integer arraycopy(byte[] src, int srcOffset, byte[] dest, int destOffset) {
         if (src == null || src.length == 0) {
             return 0;
         }
@@ -270,7 +270,7 @@ public class ByteUtil {
      * @param len
      * @return
      */
-    public static int arraycopy(byte[] src, int srcOffset, byte[] dest, int destOffset, int len) {
+    public static Integer arraycopy(byte[] src, int srcOffset, byte[] dest, int destOffset, int len) {
 
         if (src == null || src.length == 0) {
             return 0;
@@ -289,7 +289,7 @@ public class ByteUtil {
      * @param destOffset
      * @return string byte length
      */
-    public static int strcopy2byte(String s, byte[] dest, int destOffset) {
+    public static Integer strcopy2byte(String s, byte[] dest, int destOffset) {
         if (s == null) {
             //null 不处理
             return 0;

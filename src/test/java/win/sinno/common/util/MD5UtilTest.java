@@ -48,5 +48,8 @@ public class MD5UtilTest {
             System.out.print(" ");
         }
 
+        System.out.println(new String(bytes));
+
+        System.out.println(Md5Util.MD5Byte2Str(bytes));
     }
 }
