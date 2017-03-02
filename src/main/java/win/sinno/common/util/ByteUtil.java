@@ -9,9 +9,9 @@ package win.sinno.common.util;
  */
 public class ByteUtil {
 
-    private static final String[] HEX_CODE = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};
+    private static final String[] HEX_CODE = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
 
-    private static final String HEX_STR = "0123456789abcdef";
+    private static final String HEX_STR = "0123456789ABCDEF";
 
     private ByteUtil() {
     }
@@ -77,6 +77,7 @@ public class ByteUtil {
             throw new IllegalArgumentException("bytes length:" + bytes.length + " can not format to int!");
         }
 
+        //需要将字节符号位算进去，所以所有 byte & 0xff
         return (bytes[0] & 0xff) << 24
                 | (bytes[1] & 0xff) << 16
                 | (bytes[2] & 0xff) << 8
@@ -102,6 +103,17 @@ public class ByteUtil {
                 | (bytes[offset + 2] & 0xff) << 8
                 | bytes[offset + 3] & 0xff
                 ;
+    }
+
+    /**
+     * one byte 2 int
+     *
+     * @param bytes
+     * @param offset
+     * @return
+     */
+    public static Integer onebyte2int(byte[] bytes, int offset) {
+        return byte2int(bytes[offset]);
     }
 
     public static Long byte2long(byte[] bytes) {
@@ -137,6 +149,116 @@ public class ByteUtil {
                 | ((long) (bytes[offset + 7] & 0xff))
                 ;
     }
+
+    /**
+     * byte 2 String.trim()
+     * <p>
+     * charset=iso-8859-1
+     *
+     * @param bytes
+     * @param offset
+     * @param length
+     * @return
+     */
+    public static String byte2String(byte[] bytes, int offset, int length) {
+        return byte2String(bytes, offset, length, null);
+    }
+
+    /**
+     * byte 2 String.trim()
+     * <p>
+     * msgFormat = 0 , charset name = iso-8859-1
+     * msgFormat = 8 , charset name = iso-10646-ucs-2
+     * msgFormat = 15 , charset name = gb18030
+     * msgFormat = other , charset name = iso-8859-1
+     *
+     * @param bytes
+     * @param offset
+     * @param length
+     * @param msgFmt
+     * @return
+     */
+    public static String byte2String(byte[] bytes, int offset, int length, Integer msgFmt) {
+
+        byte[] bs = new byte[length];
+
+        //byte copy
+        arraycopy(bytes, offset, bs, 0, length);
+
+        String str = MsgContentUtil.formatMsg(bs, msgFmt);
+        return (str != null) ? str.trim() : str;
+    }
+
+    /**
+     * byte array -> md5 string 32位16进制字符串
+     *
+     * @param bytes
+     * @param offset
+     * @param length
+     * @return
+     */
+    public static String byte2Md5String(byte[] bytes, int offset, int length) {
+        byte[] bs = new byte[length];
+
+        arraycopy(bytes, offset, bs, 0, length);
+        return Md5Util.MD5Byte2Str(bs);
+    }
+
+    public static String byte2bit(byte b) {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(b >> 7 & 0x1);
+        sb.append(b >> 6 & 0x1);
+        sb.append(b >> 5 & 0x1);
+        sb.append(b >> 4 & 0x1);
+        sb.append(b >> 3 & 0x1);
+        sb.append(b >> 2 & 0x1);
+        sb.append(b >> 1 & 0x1);
+        sb.append(b >> 0 & 0x1);
+
+        return sb.toString();
+    }
+
+    public static String short2bit(short s) {
+
+        byte[] bs = short2byte(s);
+
+        StringBuilder sb = new StringBuilder();
+
+        for (byte b : bs) {
+            sb.append(byte2bit(b));
+        }
+
+        return sb.toString();
+    }
+
+    public static String int2bit(int i) {
+
+        byte[] bs = int2byte(i);
+
+        StringBuilder sb = new StringBuilder();
+
+        for (byte b : bs) {
+            sb.append(byte2bit(b));
+        }
+
+        return sb.toString();
+    }
+
+    public static String long2bit(long l) {
+
+        byte[] bs = long2byte(l);
+
+        StringBuilder sb = new StringBuilder();
+
+        for (byte b : bs) {
+            sb.append(byte2bit(b));
+        }
+
+        return sb.toString();
+    }
+
 
     //////////other 2 byte///////
 
@@ -290,15 +412,18 @@ public class ByteUtil {
      * @return string byte length
      */
     public static Integer strcopy2byte(String s, byte[] dest, int destOffset) {
+
         if (s == null) {
             //null 不处理
             return 0;
         }
+
         byte[] bytes = s.getBytes();
 
         System.arraycopy(bytes, 0, dest, destOffset, bytes.length);
 
         return bytes.length;
     }
+
 
 }

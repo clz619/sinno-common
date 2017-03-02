@@ -35,6 +35,7 @@ public class MsgContentUtil {
     /**
      * String -> array
      * <p>
+     * msgFormat = 0 , charset name = iso-8859-1
      * msgFormat = 8 , charset name = iso-10646-ucs-2
      * msgFormat = 15 , charset name = gb18030
      * msgFormat = other , charset name = iso-8859-1
@@ -43,13 +44,17 @@ public class MsgContentUtil {
      * @param msgFormat
      * @return
      */
-    public static byte[] formatMsg(String msgContent, int msgFormat) {
+    public static byte[] formatMsg(String msgContent, Integer msgFormat) {
 
         if (msgContent == null || msgContent.trim().length() == 0) {
             return null;
         }
 
         try {
+            if (msgFormat == null || msgFormat == 0) {
+                return msgContent.getBytes("iso-8859-1");
+            }
+
             if (msgFormat == 8) {
                 return msgContent.getBytes("iso-10646-ucs-2");
             } else if (msgFormat == 15) {
@@ -89,6 +94,7 @@ public class MsgContentUtil {
     /**
      * byte array -> String
      * <p>
+     * msgFormat = 0 , charset name = iso-8859-1
      * msgFormat = 8 , charset name = iso-10646-ucs-2
      * msgFormat = 15 , charset name = gb18030
      * msgFormat = other , charset name = iso-8859-1
@@ -97,12 +103,16 @@ public class MsgContentUtil {
      * @param msgFormat
      * @return
      */
-    public static String formatMsg(byte[] bytes, int msgFormat) {
+    public static String formatMsg(byte[] bytes, Integer msgFormat) {
         if (bytes == null || bytes.length == 0) {
             return null;
         }
 
         try {
+            if (msgFormat == null || msgFormat == 0) {
+                return new String(bytes, "iso-8859-1");
+            }
+
             if (msgFormat == 8) {
                 return new String(bytes, "iso-10646-ucs-2");
             } else if (msgFormat == 15) {
