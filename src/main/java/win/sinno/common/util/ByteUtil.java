@@ -260,6 +260,11 @@ public class ByteUtil {
     }
 
 
+    public static Long bit2long(String bitStr) {
+        return Long.parseLong(bitStr, 2);
+    }
+
+
     //////////other 2 byte///////
 
     public static byte char2Byte(char c) {
