@@ -1,6 +1,7 @@
 package win.sinno.common.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * base model .
@@ -16,11 +17,11 @@ public interface IBaseModel extends Serializable {
 
     void setId(Long id);
 
-    Long getAddTs();
+    Date getAddTs();
 
-    void setAddTs(Long addTs);
+    void setAddTs(Date addTs);
 
-    Long getUpdateTs();
+    Date getUpdateTs();
 
-    void setUpdateTs(Long updateTs);
+    void setUpdateTs(Date updateTs);
 }
