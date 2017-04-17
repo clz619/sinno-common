@@ -3,8 +3,6 @@ package win.sinno.common.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 时间util
@@ -20,11 +18,6 @@ public class DateUtil {
      */
     public static final long ONE_DAY_MILLIS = 1000l * 60 * 60 * 24;
 
-
-    /**
-     * 时间戳格式化map
-     */
-    private static Map<String, SimpleDateFormat> simpleDateFormatMap = new HashMap<String, SimpleDateFormat>();
 
     /**
      * 获取间隔天数
@@ -48,22 +41,8 @@ public class DateUtil {
      * @return
      */
     public static String format(Long ts, String pattern) {
-        SimpleDateFormat simpleDateFormat = simpleDateFormatMap.get(pattern);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-        if (simpleDateFormat == null) {
-
-            synchronized (simpleDateFormatMap) {
-
-                simpleDateFormat = simpleDateFormatMap.get(pattern);
-
-                if (simpleDateFormat == null) {
-
-                    simpleDateFormat = new SimpleDateFormat(pattern);
-
-                    simpleDateFormatMap.put(pattern, simpleDateFormat);
-                }
-            }
-        }
         return simpleDateFormat.format(ts);
     }
 
@@ -76,27 +55,17 @@ public class DateUtil {
      * @throws ParseException
      */
     public static Long format2TimeMilles(String timeStr, String pattern) throws ParseException {
-        SimpleDateFormat simpleDateFormat = simpleDateFormatMap.get(pattern);
-        if (simpleDateFormat == null) {
-
-            synchronized (simpleDateFormatMap) {
-
-                simpleDateFormat = simpleDateFormatMap.get(pattern);
-
-                if (simpleDateFormat == null) {
-
-                    simpleDateFormat = new SimpleDateFormat(pattern);
-
-                    simpleDateFormatMap.put(pattern, simpleDateFormat);
-                }
-            }
-        }
-
-        Date date = simpleDateFormat.parse(timeStr);
+        Date date = format2Date(timeStr, pattern);
         return date.getTime();
     }
 
-    public static void main(String[] args) {
+    public static Date format2Date(String timeStr, String pattern) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+        return simpleDateFormat.parse(timeStr);
+    }
+
+    public static void main(String[] args) throws ParseException {
 
         long beginTs = 1481003013132l;
         long endTs = 1481003101644l + ONE_DAY_MILLIS + 1;
@@ -104,6 +73,9 @@ public class DateUtil {
         long day = DateUtil.getIntervalDay(beginTs, endTs);
 
         System.out.println(day);
+
+        String ts = "1704171500";
+        System.out.println(DateUtil.format2TimeMilles(ts, "yyMMddHHmm"));
     }
 
 }

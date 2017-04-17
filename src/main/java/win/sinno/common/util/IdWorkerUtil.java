@@ -1,7 +1,8 @@
 package win.sinno.common.util;
 
 /**
- * 唯一id生成器
+ * id generate
+ * 42bit,139year
  *
  * @author : admin@chenlizhong.cn
  * @version : 1.0
@@ -9,13 +10,12 @@ package win.sinno.common.util;
  */
 public class IdWorkerUtil {
 
-    //历史时间点
-    private final static long twepoch = 614185200000L;
+    // 2017-04-10 00:00:00
+    private final static long twepoch = 1491753600000L;
 
+    private final static long workerIdBits = 8L;
 
-    private final static long workerIdBits = 10L;
-
-    private final static long sequenceBits = 12L;
+    private final static long sequenceBits = 14L;
 
     public final static long maxWorkerId = -1L ^ -1L << workerIdBits;
 
@@ -50,6 +50,7 @@ public class IdWorkerUtil {
      * @return
      */
     public synchronized long nextId() {
+
         long timestamp = this.timeGen();
 
         if (this.lastTimestamp == timestamp) {
@@ -58,9 +59,7 @@ public class IdWorkerUtil {
             if (this.sequence == 0) {
                 timestamp = this.tilNextMillis(this.lastTimestamp);
             }
-
         } else {
-            //
             this.sequence = 0;
         }
 
@@ -80,7 +79,6 @@ public class IdWorkerUtil {
         //生成id
         long nextId = ((timestamp - twepoch << timestampLeftShift))
                 | (this.workerId << this.workerIdShift) | (this.sequence);
-
 
         return nextId;
     }
@@ -103,6 +101,5 @@ public class IdWorkerUtil {
     private long timeGen() {
         return System.currentTimeMillis();
     }
-
 
 }

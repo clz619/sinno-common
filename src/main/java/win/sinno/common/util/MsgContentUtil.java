@@ -83,7 +83,6 @@ public class MsgContentUtil {
         }
 
         try {
-
             return new String(bytes, "iso-8859-1");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
