@@ -16,7 +16,10 @@ import java.util.Enumeration;
  * @version : 1.0
  * @since : 2016-08-99 13:32
  */
-public class NetworkUtil {
+public final class NetworkUtil {
+
+    private NetworkUtil() {
+    }
 
     /**
      * 获取主机名称

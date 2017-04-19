@@ -11,7 +11,10 @@ import java.util.Date;
  * @version : 1.0
  * @since : 2016-12-06 15:26
  */
-public class DateUtil {
+public final class DateUtil {
+
+    private DateUtil() {
+    }
 
     /**
      * 一天的毫秒时长

@@ -17,7 +17,10 @@ import java.util.Set;
  * @version : 1.0
  * @since : 2017/3/6 上午11:55
  */
-public class ClassUtil {
+public final class ClassUtil {
+
+    private ClassUtil() {
+    }
 
     public static ClassLoader getClassLoader() {
         return Thread.currentThread().getContextClassLoader();

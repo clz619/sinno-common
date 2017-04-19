@@ -10,7 +10,7 @@ import java.util.Map;
  * @version : 1.0
  * @since : 2017/2/10 下午4:27
  */
-public class SequenceIdGenerator {
+public final class SequenceIdGenerator {
 
     private String name;
 

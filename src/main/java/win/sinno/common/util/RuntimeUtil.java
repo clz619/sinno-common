@@ -9,7 +9,10 @@ import java.lang.management.ManagementFactory;
  * @version : 1.0
  * @since : 2017/2/6 下午1:50
  */
-public class RuntimeUtil {
+public final class RuntimeUtil {
+
+    private RuntimeUtil() {
+    }
 
     /**
      * @return 2676@lizhongchendeMacBook-Pro.local

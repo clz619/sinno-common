@@ -9,7 +9,10 @@ import java.io.UnsupportedEncodingException;
  * @version : 1.0
  * @since : 2017/2/14 上午10:22
  */
-public class MsgContentUtil {
+public final class MsgContentUtil {
+
+    private MsgContentUtil() {
+    }
 
     /**
      * String -> array

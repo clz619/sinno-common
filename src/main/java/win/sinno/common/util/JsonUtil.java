@@ -28,6 +28,9 @@ public final class JsonUtil {
         OBJECT_MAPPER_NO_QUOTE.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
     }
 
+    private JsonUtil() {
+    }
+
     /**
      * 将POJO转为JSON
      *

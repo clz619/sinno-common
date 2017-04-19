@@ -8,7 +8,7 @@ package win.sinno.common.util;
  * @version : 1.0
  * @since : 2016-04-15 11:59
  */
-public class IdWorkerUtil {
+public final class IdWorkerUtil {
 
     // 2017-04-10 00:00:00
     private final static long twepoch = 1491753600000L;

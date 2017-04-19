@@ -13,7 +13,10 @@ import java.util.List;
  * @version : 1.0
  * @since : 2016-12-08 15:46
  */
-public class ArrayUtil {
+public final class ArrayUtil {
+
+    private ArrayUtil() {
+    }
 
     /**
      * 过滤空字符串

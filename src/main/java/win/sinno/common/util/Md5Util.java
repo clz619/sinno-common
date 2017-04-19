@@ -12,7 +12,10 @@ import java.util.Map;
  * @version : 1.0
  * @since : 2016-04-15 17:59
  */
-public class Md5Util {
+public final class Md5Util {
+
+    private Md5Util() {
+    }
 
     /**
      * 小写16进制数字
