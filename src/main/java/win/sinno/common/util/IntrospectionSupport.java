@@ -22,7 +22,7 @@ public final class IntrospectionSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(IntrospectionSupport.class);
 
-    public static boolean getProperties(Object target, Map props, String optionPrefix) {
+    public static boolean getProperties(Object target, Map<String, Object> props, String optionPrefix) {
 
         boolean rc = false;
 
@@ -40,28 +40,23 @@ public final class IntrospectionSupport {
 
             if (isGetter(method)) {
                 String name = method.getName();
-                Class<?> type = method.getReturnType();
+
                 try {
                     Object value = method.invoke(target);
                     if (value == null) {
                         continue;
                     }
 
-                    String str = convert2String(value, type);
-                    if (str == null) {
-                        continue;
-                    }
-
                     String fieldName = getFieldName4Getter(name);
                     if (StringUtils.isNotEmpty(optionPrefix)) {
-                        props.put(optionPrefix + fieldName, str);
+                        props.put(optionPrefix + fieldName, value);
                     } else {
-                        props.put(fieldName, str);
+                        props.put(fieldName, value);
                     }
                     rc = true;
 
                 } catch (Exception ignore) {
-
+                    LOG.error(ignore.getMessage(), ignore);
                 }
             }
 
@@ -88,7 +83,7 @@ public final class IntrospectionSupport {
      * @param optionPrefix
      * @return
      */
-    public static boolean setProperties(Object target, Map<String, ?> props, String optionPrefix) {
+    public static boolean setProperties(Object target, Map<String, Object> props, String optionPrefix) {
         boolean rc = false;
 
         if (target == null) {
@@ -290,7 +285,6 @@ public final class IntrospectionSupport {
             sb.append("]");
         }
 
-        //
         return value.toString();
     }
 

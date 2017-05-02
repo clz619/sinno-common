@@ -29,6 +29,13 @@ public class NetworkUtilTest {
         Collection<InetAddress> inetAddresses = NetworkUtil.getPublicIpv4Address();
 
         System.out.println("public ip addr size:" + inetAddresses.size());
+
+        if (CollectionUtils.isNotEmpty(inetAddresses)) {
+
+            for (InetAddress inetAddress : inetAddresses) {
+                System.out.println(inetAddress.getHostName());
+            }
+        }
     }
 
     @Test
