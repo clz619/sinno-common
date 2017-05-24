@@ -51,10 +51,16 @@ public class PropertiesUtil {
     }
 
     /**
-     * load properties from resources
+     * load properties from InputStream
      *
      * @return
      */
+    public static Properties loadFromInputStream(InputStream inputStream) throws IOException {
+        Properties props = new Properties();
+        props.load(inputStream);
+        return props;
+    }
+
     public static Properties loadFromResources(String filename) throws IOException {
         InputStream inputStream = ClassLoader.getSystemResourceAsStream(filename);
 

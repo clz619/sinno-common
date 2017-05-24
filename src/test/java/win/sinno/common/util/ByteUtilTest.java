@@ -222,4 +222,12 @@ public class ByteUtilTest {
         long l = 23;
         System.out.println(ByteUtil.long2bit(l));
     }
+
+    @Test
+    public void testInt2Byte() {
+        int i = -684493631;
+        System.out.println(ByteUtil.int2bit(i));
+        System.out.println((byte) i);
+
+    }
 }
