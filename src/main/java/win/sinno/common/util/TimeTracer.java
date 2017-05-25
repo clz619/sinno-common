@@ -34,6 +34,22 @@ public class TimeTracer {
         return new TimeTracer(identify);
     }
 
+    public long getBeginTs() {
+        return timeTuple.getBeginTs();
+    }
+
+    public long getTotalUseTs() {
+        return timeTuple.getEndTs() - timeTuple.getBeginTs();
+    }
+
+    public long getEndTs() {
+        return timeTuple.getEndTs();
+    }
+
+    public int getTraceNum() {
+        return traceEventList.size();
+    }
+
     public void begin() {
         if (first.compareAndSet(false, true)) {
             timeTuple.setBeginTs(System.currentTimeMillis());
@@ -70,7 +86,7 @@ public class TimeTracer {
         sb.append(", step=");
         sb.append(i);
         sb.append(", totalUseTs=");
-        sb.append(timeTuple.getEndTs() - timeTuple.getBeginTs());
+        sb.append(getTotalUseTs());
         sb.append("ms");
         sb.append(", beginTs=");
         sb.append(timeTuple.getBeginTs());
@@ -94,6 +110,7 @@ public class TimeTracer {
 
         return sb.toString();
     }
+
 
     /**
      * 时间元数据

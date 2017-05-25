@@ -25,15 +25,11 @@ public final class IdWorkerUtil {
 
     private final static long timestampLeftShift = sequenceBits + workerIdBits;
 
-
     private final long workerId;
-
 
     private long sequence = 0L;
 
-
     private long lastTimestamp = -1L;
-
 
     public IdWorkerUtil(final long workerId) {
         if (workerId > this.maxWorkerId || workerId < 0) {
