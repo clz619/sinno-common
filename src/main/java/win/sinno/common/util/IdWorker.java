@@ -8,14 +8,14 @@ package win.sinno.common.util;
  * @version : 1.0
  * @since : 2016-04-15 11:59
  */
-public final class IdWorkerUtil {
+public final class IdWorker {
 
     // 2017-04-10 00:00:00
     private final static long twepoch = 1491753600000L;
 
-    private final static long workerIdBits = 8L;
+    private final static long workerIdBits = 10L;
 
-    private final static long sequenceBits = 14L;
+    private final static long sequenceBits = 12L;
 
     public final static long maxWorkerId = -1L ^ -1L << workerIdBits;
 
@@ -31,7 +31,7 @@ public final class IdWorkerUtil {
 
     private long lastTimestamp = -1L;
 
-    public IdWorkerUtil(final long workerId) {
+    public IdWorker(final long workerId) {
         if (workerId > this.maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format(
                     "worker Id can't be greater than %d or less than 0",

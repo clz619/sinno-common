@@ -9,26 +9,35 @@ import org.junit.Test;
  * @version : 1.0
  * @since : 2017/4/10 11:24
  */
-public class IdWorkerUtilTest {
+public class IdWorkerTest {
 
     @Test
     public void testId() {
-        IdWorkerUtil idWorkerUtil = new IdWorkerUtil(1);
+        IdWorker idWorker = new IdWorker(1);
 
-        System.out.println(idWorkerUtil.nextId());
+        System.out.println(idWorker.nextId());
+    }
+
+    @Test
+    public void test100Id() {
+        IdWorker idWorker = new IdWorker(1);
+
+        for (int i = 0; i < 100; i++) {
+            System.out.println(idWorker.nextId());
+        }
     }
 
 
     @Test
     public void testSpeed() {
 
-        IdWorkerUtil idWorkerUtil = new IdWorkerUtil(1);
+        IdWorker idWorker = new IdWorker(1);
 
         long beginTs = System.currentTimeMillis();
 
         int c = 0;
         while ((beginTs + 1000) > System.currentTimeMillis()) {
-            idWorkerUtil.nextId();
+            idWorker.nextId();
             c++;
         }
         // 10210163 1s create 1000w
