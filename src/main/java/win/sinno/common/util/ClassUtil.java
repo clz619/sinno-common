@@ -5,10 +5,14 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.net.JarURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * class util
@@ -69,11 +73,30 @@ public final class ClassUtil {
                 if (null != url) {
                     String protocol = url.getProtocol();
                     if ("file".equals(protocol)) {
-                        //文件
+                        // 文件
                         String packagePath = url.getPath().replaceAll("%20", " ");
                         addClass(classSet, packagePath, null);
                     } else if ("jar".equals(protocol)) {
-                        //TODO jar
+                        // jar
+                        URLConnection urlConnection = url.openConnection();
+
+                        if (urlConnection != null) {
+                            JarURLConnection jarURLConnection = (JarURLConnection) urlConnection;
+                            JarFile jarFile = jarURLConnection.getJarFile();
+                            if (jarFile != null) {
+                                Enumeration<JarEntry> jarEntries = jarFile.entries();
+                                while (jarEntries.hasMoreElements()) {
+                                    JarEntry jarEntry = jarEntries.nextElement();
+                                    String jarEntryName = jarEntry.getName();
+
+                                    if (jarEntryName.endsWith(".class")) {
+                                        String className = jarEntryName.substring(0, jarEntryName.lastIndexOf("."))
+                                                .replaceAll("/", ".");
+                                        doAddClass(classSet, className);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

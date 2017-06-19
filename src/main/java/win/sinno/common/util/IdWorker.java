@@ -59,7 +59,8 @@ public final class IdWorker {
             this.sequence = 0;
         }
 
-        //同步时间 或 修改时间，可能造成机器当前 比上一次的时间戳还要早，这样可能会产生重复的ip，这是不允许的
+        // 同步时间 或 修改时间，可能造成机器当前 比上一次的时间戳还要早，这样可能会产生重复的id，这是不允许的
+        // 但是若jvm重启过，即lastTimestamp重置了，则也有可能产生和之前产生的相同的id
         if (timestamp < this.lastTimestamp) {
             try {
                 throw new Exception(
@@ -92,7 +93,7 @@ public final class IdWorker {
     }
 
     /**
-     * @return
+     * @return 毫秒级
      */
     private long timeGen() {
         return System.currentTimeMillis();
