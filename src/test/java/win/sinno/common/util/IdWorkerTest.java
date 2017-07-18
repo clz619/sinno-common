@@ -43,4 +43,13 @@ public class IdWorkerTest {
         // 10210163 1s create 1000w
         System.out.println(c);
     }
+
+    @Test
+    public void testMask() {
+
+        System.out.println(-1l << 10);
+        System.out.println(-1l ^ -1l << 10);
+
+        System.out.println((1 << 10) - 1);
+    }
 }

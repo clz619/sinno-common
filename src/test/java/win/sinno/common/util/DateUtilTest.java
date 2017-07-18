@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 /**
- * TODO
+ * Date util test
  *
  * @author : admin@chenlizhong.cn
  * @version : 1.0
@@ -15,13 +15,22 @@ import java.util.Date;
 public class DateUtilTest {
 
     @Test
-    public void testFormate(){
-        String t= "1702141454";
+    public void testFormate() {
+        String t = "1702141454";
         try {
-            Long ts=DateUtil.format2TimeMilles(t,"yyMMddHHmm");
+            Long ts = DateUtil.format2TimeMilles(t, "yyMMddHHmm");
             System.out.println(new Date(ts));
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testFormatMillis() {
+        String[] array = {"2m", "34s", "4h", "1d"};
+
+        for (String s : array) {
+            System.out.println(s + " : " + DateUtil.format2Milles(s));
         }
     }
 }

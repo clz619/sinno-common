@@ -15,6 +15,7 @@ public final class IdWorker {
 
     private final static long workerIdBits = 10L;
 
+    //1ms 1023 -> 1s 102.3w
     private final static long sequenceBits = 12L;
 
     public final static long maxWorkerId = -1L ^ -1L << workerIdBits;
