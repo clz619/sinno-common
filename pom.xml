@@ -6,7 +6,7 @@
 
     <groupId>win.sinno</groupId>
     <artifactId>sinno-common</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 
     <packaging>jar</packaging>
 
@@ -15,6 +15,7 @@
         1.0.3 : remove IBaseModel
         1.0.4 : add reflect utils
         1.0.5 : add atmoic cycle interger
+        1.0.6 : add http
 
     </description>
 
@@ -35,6 +36,8 @@
 
         <!--log-->
         <version.slf4j.log4j12>1.7.22</version.slf4j.log4j12>
+
+        <httpclient.version>4.5.3</httpclient.version>
 
         <!--plugin-->
         <version.plugin.maven.compiler>3.5.1</version.plugin.maven.compiler>
@@ -73,6 +76,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>${version.commons.collections4}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
         </dependency>
 
         <!-- slf4j-->

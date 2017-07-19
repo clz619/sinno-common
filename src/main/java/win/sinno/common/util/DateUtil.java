@@ -102,7 +102,6 @@ public final class DateUtil {
     public static long getIntervalDay(Long beginTs, Long endTs) {
         //间隔毫秒数
         long intervalMillis = endTs - beginTs;
-
         return intervalMillis / ONE_DAY_MILLIS;
     }
 
@@ -115,7 +114,6 @@ public final class DateUtil {
      */
     public static String format(Long ts, String pattern) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-
         return simpleDateFormat.format(ts);
     }
 
@@ -134,7 +132,6 @@ public final class DateUtil {
 
     public static Date format2Date(String timeStr, String pattern) throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-
         return simpleDateFormat.parse(timeStr);
     }
 
@@ -142,7 +139,8 @@ public final class DateUtil {
      * 转换成时间戳
      *
      * @param timeWithUnit
-     * @return
+     * @return 符合规范，如1s、1m、1h、1d、1w返回正常时间戳
+     * 不符合规范的，如12ss返回null
      */
     public static Long format2Milles(String timeWithUnit) {
 

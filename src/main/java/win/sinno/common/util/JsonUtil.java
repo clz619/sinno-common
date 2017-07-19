@@ -24,6 +24,9 @@ public final class JsonUtil {
     private static final ObjectMapper OBJECT_MAPPER_NO_QUOTE = new ObjectMapper();
 
     static {
+        OBJECT_MAPPER.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+        OBJECT_MAPPER.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+
         OBJECT_MAPPER_NO_QUOTE.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, false);
         OBJECT_MAPPER_NO_QUOTE.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
     }
