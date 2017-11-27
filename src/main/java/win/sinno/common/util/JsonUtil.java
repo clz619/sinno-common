@@ -86,8 +86,6 @@ public final class JsonUtil {
 
     /**
      * json字符串转Map
-     * 2015年4月3日上午10:41:25
-     * auther:shijing
      *
      * @param jsonStr
      * @return

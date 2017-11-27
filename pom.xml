@@ -22,7 +22,7 @@
     <properties>
         <!--project-->
         <project.encoding>UTF-8</project.encoding>
-        <version.java>1.7</version.java>
+        <version.java>1.8</version.java>
 
         <!--unit-->
         <version.junit>4.12</version.junit>
@@ -89,6 +89,24 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>${version.slf4j.log4j12}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.5.0</version>
         </dependency>
 
     </dependencies>

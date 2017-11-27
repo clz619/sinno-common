@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.Collection;
 
 /**
@@ -70,5 +71,10 @@ public class NetworkUtilTest {
                 }
             }
         }
+    }
+
+    @Test
+    public void testGetIp() throws UnknownHostException {
+        System.out.println(NetworkUtil.getIpAdd());
     }
 }
