@@ -40,4 +40,34 @@ public class ShellExecUtilTest {
     System.out.println(ret);
   }
 
+
+  @Test
+  public void testFileExist() throws InterruptedException, ExecutionException, IOException {
+    /**
+     *
+     ShellExecRet{cmd='ssh admin@test 'ls ~/logs/status-2017-11-25-1.log'', exitVal=255, processMsg='null', processErrMsg='ssh: Could not resolve hostname test: nodename nor servname provided, or not known
+     '}
+     ShellExecRet{cmd='ls', exitVal=0, processMsg='README.md
+     libs
+     package
+     pom.xml
+     sinno-common.iml
+     src
+     target
+     ', processErrMsg='null'}
+     */
+    //ShellExecRet{cmd='ssh admin@stat 'mkdir -p /data/tag/migrate'', exitVal=0, processMsg='', processErrMsg='null'}
+    String cmd = "ssh admin@stat 'mkdir -p /data/tag/migrate'";
+
+    ShellExecRet ret = ShellExecUtil.exec(cmd);
+
+    System.out.println(ret);
+
+    ret = ShellExecUtil.exec("ls sinno-common.iml");
+
+    System.out.println(ret);
+
+    System.out.println(ret.getExitVal() == 0 && ret.getProcessMsg() != null && ret.getProcessMsg()
+        .contains("sinno-common.iml"));
+  }
 }

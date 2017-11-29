@@ -57,6 +57,10 @@ public class StringUtilTest {
   @Test
   public void test1_45() {
     System.out.println(1l << 45);
+
+    Double d = -11d;
+
+    System.out.println("aa " + (-d.longValue()) + " bb");
   }
 
   @Test
