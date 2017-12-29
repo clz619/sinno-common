@@ -22,6 +22,9 @@ public class StringUtilTest {
     aa.add("aaa");
     aa.add("bbb");
     System.out.println(StringUtils.join(aa, ","));
+
+
+    System.out.println(111%10);
   }
 
   @Test
