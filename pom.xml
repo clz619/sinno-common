@@ -33,7 +33,7 @@
     <!--common-->
     <version.commons.lang3>3.4</version.commons.lang3>
     <version.commons.collections4>4.1</version.commons.collections4>
-
+    <commons.io.version>2.6</commons.io.version>
     <!--log-->
     <version.slf4j.log4j12>1.7.22</version.slf4j.log4j12>
 
@@ -66,6 +66,12 @@
     </dependency>
 
     <!-- apache common lang-->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${commons.io.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
