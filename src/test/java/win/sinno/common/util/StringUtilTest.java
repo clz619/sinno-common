@@ -23,8 +23,9 @@ public class StringUtilTest {
     aa.add("bbb");
     System.out.println(StringUtils.join(aa, ","));
 
+    System.out.println(111 % 10);
 
-    System.out.println(111%10);
+    System.out.println(Integer.MAX_VALUE);
   }
 
   @Test

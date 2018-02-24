@@ -12,7 +12,7 @@
 
   <groupId>win.sinno</groupId>
   <artifactId>sinno-common</artifactId>
-  <version>1.0.6</version>
+  <version>1.0.7</version>
 
   <packaging>jar</packaging>
 
@@ -22,7 +22,7 @@
     1.0.4 : add reflect utils
     1.0.5 : add atmoic cycle interger
     1.0.6 : add http
-
+    1.0.7 : mod json util
   </description>
 
   <properties>
