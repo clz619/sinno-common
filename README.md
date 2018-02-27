@@ -1,3 +1,6 @@
 # sinno-common
 
-common,util
+
+提供各种工具类
+
+
