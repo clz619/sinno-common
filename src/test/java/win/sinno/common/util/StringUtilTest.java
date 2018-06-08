@@ -26,6 +26,21 @@ public class StringUtilTest {
     System.out.println(111 % 10);
 
     System.out.println(Integer.MAX_VALUE);
+
+    List<Integer> list = new ArrayList<>();
+    for (int i = 0; i < 10; i++) {
+      list.add(i);
+    }
+
+    int step = 3;
+
+    for (int i = 0; i < list.size(); ) {
+      int b = i;
+      i = (i + step) < list.size() ? (i + step) : list.size();
+
+      System.out.println(list.subList(b, i));
+    }
+
   }
 
   @Test
@@ -77,5 +92,12 @@ public class StringUtilTest {
     System.out.println(tag - (1l << 45));
 
     System.out.println(tag ^ ((1l << 45)));
+  }
+
+  @Test
+  public void testBytes() {
+    String str = "1234";
+    System.out.println(str.getBytes().length);
+
   }
 }
