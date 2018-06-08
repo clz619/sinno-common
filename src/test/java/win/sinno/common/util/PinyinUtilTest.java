@@ -13,7 +13,7 @@ public class PinyinUtilTest {
   @Test
   public void testPinyin() {
 
-    String chinese = "abc铭佳童话123旗舰店ert";
+    String chinese = "abc铭佳童话123[{【】旗舰店ert";
 
     System.out.println(PinyinUtil.format2PinYin(chinese));
     System.out.println(PinyinUtil.format2PinYinFirstChar(chinese));
