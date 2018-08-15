@@ -100,4 +100,10 @@ public class StringUtilTest {
     System.out.println(str.getBytes().length);
 
   }
+
+  @Test
+  public void testSize() {
+    String ss = "【飞成物流】有四类大件资质、拥有大量可以承接30-600吨车辆，业务以江浙沪出发全国各地，开发物流平台，整合平台回程车资源，能有效做到车货匹配为您降低20%成本。联系人张金龙，手机：13771572666，邮箱:13771572666@163.com 合作飞成您我双赢！回T退订回";
+    System.out.println(ss.length());
+  }
 }

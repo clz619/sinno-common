@@ -45,4 +45,19 @@ public class DateUtilTest {
     System.out.println(date.getTime());
 
   }
+
+  @Test
+  public void testTs() {
+    String bts = "2018-07-09 00:00:00";
+    String ets = "2018-07-12 15:00:00";
+    String pattern = "yyyy-MM-dd HH:mm:ss";
+    try {
+      Long bbts = DateUtil.format2TimeMilles(bts, pattern);
+      Long eets = DateUtil.format2TimeMilles(ets, pattern);
+      System.out.println(bbts);
+      System.out.println(eets);
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+  }
 }
