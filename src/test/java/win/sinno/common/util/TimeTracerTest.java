@@ -11,23 +11,36 @@ import org.junit.Test;
  */
 public class TimeTracerTest {
 
-    @Test
-    public void test() throws InterruptedException {
+  @Test
+  public void test() throws InterruptedException {
 
-        TimeTracer timeTracer = TimeTracer.newInstance("sdfdstgf23");
+    TimeTracer timeTracer = TimeTracer.newInstance("sdfdstgf23");
 
-        timeTracer.trace("frist");
+    timeTracer.trace("frist");
 
-        Thread.sleep(1000l);
+    Thread.sleep(1000l);
 
-        timeTracer.trace("hhhh");
+    timeTracer.trace("hhhh");
 
-        Thread.sleep(2000l);
+    Thread.sleep(2000l);
 
-        timeTracer.trace("finish");
+    timeTracer.trace("finish");
 
-        timeTracer.end();
+    timeTracer.end();
 
-        System.out.println(timeTracer.report());
-    }
+    System.out.println(timeTracer.report());
+  }
+
+  @Test
+  public void nanoTest() throws InterruptedException {
+
+    System.out.println(System.currentTimeMillis());
+    System.out.println(System.nanoTime());
+    Thread.sleep(1l);
+    System.out.println(System.nanoTime());
+    Thread.sleep(8l);
+    System.out.println(System.nanoTime());
+    Thread.sleep(1l);
+    System.out.println(System.nanoTime());
+  }
 }

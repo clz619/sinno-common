@@ -4,7 +4,10 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * win.sinno.common.util.QpsStater
@@ -17,15 +20,15 @@ public class QpsStater {
   // two lock
   private Object[] lock = new Object[]{new Object(), new Object()};
 
-  private QpsMessageListener qpsMessageListener;
-
   private RemovalListener<Long, AtomicInteger> removalListener;
 
   private Cache<Long, AtomicInteger> qpsCache;
 
-  public QpsStater(QpsMessageListener qpsMessageListener) {
+  public QpsStater() {
+    this(new DefaultQpsMessageListener());
+  }
 
-    this.qpsMessageListener = qpsMessageListener;
+  public QpsStater(final QpsMessageListener qpsMessageListener) {
 
     this.removalListener = new RemovalListener<Long, AtomicInteger>() {
       @Override
@@ -34,8 +37,9 @@ public class QpsStater {
       }
     };
 
-    qpsCache = CacheBuilder.newBuilder().maximumSize(1)
-//        .expireAfterWrite(3, TimeUnit.SECONDS)
+    qpsCache = CacheBuilder.newBuilder()
+        .maximumSize(3)
+        .expireAfterWrite(2, TimeUnit.SECONDS)
         .removalListener(removalListener).build();
 
   }
@@ -67,9 +71,22 @@ public class QpsStater {
     return lock[(int) ((ts / 1000) % 2)];
   }
 
+  public void stop() {
+    qpsCache.invalidateAll();
+  }
+
   public interface QpsMessageListener {
 
     void receive(Long ts, Integer qps);
   }
 
+  public static class DefaultQpsMessageListener implements QpsMessageListener {
+
+    private static final Logger LOG = LoggerFactory.getLogger("qps");
+
+    @Override
+    public void receive(Long ts, Integer qps) {
+      LOG.info(ts + ":" + qps);
+    }
+  }
 }
