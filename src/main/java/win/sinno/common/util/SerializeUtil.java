@@ -2,6 +2,7 @@ package win.sinno.common.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -13,8 +14,14 @@ import java.io.ObjectOutputStream;
  */
 public class SerializeUtil {
 
-  public static Object byteToObject(byte[] bytes) {
+  public static Object byteToObject(byte[] bytes) throws IOException, ClassNotFoundException {
+
+    if (bytes == null) {
+      throw new NullPointerException("bytes can't be null!");
+    }
+
     Object obj = null;
+
     try {
       ByteArrayInputStream bi = new ByteArrayInputStream(bytes);
       ObjectInputStream oi = new ObjectInputStream(bi);
@@ -23,14 +30,21 @@ public class SerializeUtil {
       bi.close();
       oi.close();
     } catch (Exception e) {
-      e.printStackTrace();
+      throw e;
     }
+
     return obj;
   }
 
 
-  public static byte[] objectToByte(Object obj) {
+  public static byte[] objectToByte(Object obj) throws IOException {
+
+    if (obj == null) {
+      throw new NullPointerException("obj can't be null!");
+    }
+
     byte[] bytes = null;
+
     try {
       ByteArrayOutputStream bo = new ByteArrayOutputStream();
       ObjectOutputStream oo = new ObjectOutputStream(bo);
@@ -41,8 +55,9 @@ public class SerializeUtil {
       bo.close();
       oo.close();
     } catch (Exception e) {
-      e.printStackTrace();
+      throw e;
     }
+
     return bytes;
   }
 }
