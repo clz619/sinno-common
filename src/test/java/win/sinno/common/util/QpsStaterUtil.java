@@ -19,6 +19,11 @@ public class QpsStaterUtil {
       public void receive(Long ts, Integer qps) {
         System.out.println(ts + "," + qps);
       }
+
+      @Override
+      public void receive(String name, Long ts, Integer qps) {
+        System.out.println(name + ":" + ts + "," + qps);
+      }
     };
     QpsStater qpsStater = new QpsStater(qml);
     Random random = new Random();

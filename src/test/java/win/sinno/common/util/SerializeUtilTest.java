@@ -1,5 +1,6 @@
 package win.sinno.common.util;
 
+import java.io.IOException;
 import java.io.Serializable;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import org.junit.Test;
 public class SerializeUtilTest {
 
   @Test
-  public void testSerialize1() {
+  public void testSerialize1() throws IOException {
     A a = new A();
     a.setA("hhh");
     byte[] bs = SerializeUtil.objectToByte(a);
@@ -24,7 +25,7 @@ public class SerializeUtilTest {
   }
 
   @Test
-  public void testSerialize2() {
+  public void testSerialize2() throws IOException, ClassNotFoundException {
     byte[] bs = {-84, -19, 0, 5, 115, 114, 0, 41, 119, 105, 110, 46, 115, 105, 110, 110, 111, 46,
         99, 111, 109, 109, 111, 110, 46, 117, 116, 105, 108, 46, 83, 101, 114, 105, 97, 108, 105,
         122, 101, 85, 116, 105, 108, 84, 101, 115, 116, 36, 65, 62, 111, -14, -31, -73, 64, 102, 89,
