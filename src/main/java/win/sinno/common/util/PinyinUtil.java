@@ -16,12 +16,12 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class PinyinUtil {
 
-  private static final HanyuPinyinOutputFormat hanyuPinyinOutputFormat = new HanyuPinyinOutputFormat();
+  private static final HanyuPinyinOutputFormat HANYU_PINYIN_OUTPUT_FORMAT = new HanyuPinyinOutputFormat();
 
   static {
-    hanyuPinyinOutputFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
-    hanyuPinyinOutputFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
-    hanyuPinyinOutputFormat.setVCharType(HanyuPinyinVCharType.WITH_V);
+    HANYU_PINYIN_OUTPUT_FORMAT.setCaseType(HanyuPinyinCaseType.LOWERCASE);
+    HANYU_PINYIN_OUTPUT_FORMAT.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
+    HANYU_PINYIN_OUTPUT_FORMAT.setVCharType(HanyuPinyinVCharType.WITH_V);
   }
 
   public static String format2PinYin(String chinese) {
@@ -33,7 +33,8 @@ public class PinyinUtil {
     for (int i = 0; i < chars.length; i++) {
       try {
         if (chars[i] > 128) {
-          String[] temp = PinyinHelper.toHanyuPinyinStringArray(chars[i], hanyuPinyinOutputFormat);
+          String[] temp = PinyinHelper.toHanyuPinyinStringArray(chars[i],
+              HANYU_PINYIN_OUTPUT_FORMAT);
           for (String s : temp) {
             output.append(s);
           }
@@ -58,7 +59,8 @@ public class PinyinUtil {
     for (int i = 0; i < chars.length; i++) {
       try {
         if (chars[i] > 128) {
-          String[] temp = PinyinHelper.toHanyuPinyinStringArray(chars[i], hanyuPinyinOutputFormat);
+          String[] temp = PinyinHelper.toHanyuPinyinStringArray(chars[i],
+              HANYU_PINYIN_OUTPUT_FORMAT);
 
           if (temp.length > 0) {
             String c = temp[0];

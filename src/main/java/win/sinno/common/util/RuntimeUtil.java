@@ -11,22 +11,22 @@ import java.lang.management.ManagementFactory;
  */
 public final class RuntimeUtil {
 
-    private RuntimeUtil() {
-    }
+  private RuntimeUtil() {
+  }
 
-    /**
-     * @return 2676@lizhongchendeMacBook-Pro.local
-     */
-    public static String getRunName() {
-        return ManagementFactory.getRuntimeMXBean().getName();
-    }
+  /**
+   * @return 2676@lizhongchendeMacBook-Pro.local
+   */
+  public static String getRunName() {
+    return ManagementFactory.getRuntimeMXBean().getName();
+  }
 
-    /**
-     * runtime.name=2676@lizhongchendeMacBook-Pro.local
-     *
-     * @return 2676
-     */
-    public static String getRunPid() {
-        return getRunName().split("@")[0];
-    }
+  /**
+   * runtime.name=2676@lizhongchendeMacBook-Pro.local
+   *
+   * @return 2676
+   */
+  public static String getRunPid() {
+    return getRunName().split("@")[0];
+  }
 }

@@ -29,19 +29,20 @@ public class QpsStater {
 
   private static long qpsSeqNumber = 0;
 
-  private String name;
+  private final String name;
 
   public QpsStater() {
     this(new DefaultQpsMessageListener());
   }
 
-  private static synchronized long nextQpsId() {
-    return ++qpsSeqNumber;
+  public QpsStater(String name) {
+
+    this(name, new DefaultQpsMessageListener());
   }
 
   public QpsStater(final QpsMessageListener qpsMessageListener) {
 
-    this(null, qpsMessageListener);
+    this(null, qpsMessageListener == null ? new DefaultQpsMessageListener() : qpsMessageListener);
   }
 
   public QpsStater(String name, final QpsMessageListener qpsMessageListener) {
@@ -54,18 +55,16 @@ public class QpsStater {
       this.name = "qps-" + qpsId;
     }
 
-    this.removalListener = new RemovalListener<Long, AtomicInteger>() {
-      @Override
-      public void onRemoval(RemovalNotification<Long, AtomicInteger> notification) {
-        qpsMessageListener.receive(name, notification.getKey(), notification.getValue().get());
-      }
-    };
+    this.removalListener = new QpsRemovalListener(this.name, qpsMessageListener);
 
-    qpsCache = CacheBuilder.newBuilder().weakKeys()
+    qpsCache = CacheBuilder.newBuilder()
         .maximumSize(3)
         .expireAfterWrite(2, TimeUnit.SECONDS)
         .removalListener(removalListener).build();
+  }
 
+  private static synchronized long nextQpsId() {
+    return ++qpsSeqNumber;
   }
 
   public void increment() {
@@ -101,9 +100,24 @@ public class QpsStater {
 
   public interface QpsMessageListener {
 
-    void receive(Long ts, Integer qps);
-
     void receive(String name, Long ts, Integer qps);
+  }
+
+  public static class QpsRemovalListener implements RemovalListener<Long, AtomicInteger> {
+
+    private QpsMessageListener qpsMessageListener;
+
+    private String name;
+
+    public QpsRemovalListener(String name, QpsMessageListener qpsMessageListener) {
+      this.name = name;
+      this.qpsMessageListener = qpsMessageListener;
+    }
+
+    @Override
+    public void onRemoval(RemovalNotification<Long, AtomicInteger> notification) {
+      qpsMessageListener.receive(name, notification.getKey(), notification.getValue().get());
+    }
   }
 
   public static class DefaultQpsMessageListener implements QpsMessageListener {
@@ -111,11 +125,6 @@ public class QpsStater {
     private static final Logger LOG = LoggerFactory.getLogger("qps");
 
     private QpsStater qpsStater;
-
-    @Override
-    public void receive(Long ts, Integer qps) {
-      LOG.info(ts + ":" + qps);
-    }
 
     @Override
     public void receive(String name, Long ts, Integer qps) {

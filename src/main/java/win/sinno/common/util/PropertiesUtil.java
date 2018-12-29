@@ -36,52 +36,42 @@ import java.util.Properties;
  */
 public class PropertiesUtil {
 
-    /**
-     * load properties from file
-     *
-     * @param filepath
-     * @return
-     * @throws IOException
-     */
-    public static Properties loadFromFile(String filepath) throws IOException {
-        InputStream inputStream = new FileInputStream(new File(filepath));
-        Properties props = new Properties();
-        props.load(inputStream);
-        return props;
-    }
+  /**
+   * load properties from file
+   */
+  public static Properties loadFromFile(String filepath) throws IOException {
+    InputStream inputStream = new FileInputStream(new File(filepath));
+    Properties props = new Properties();
+    props.load(inputStream);
+    return props;
+  }
 
-    /**
-     * load properties from InputStream
-     *
-     * @return
-     */
-    public static Properties loadFromInputStream(InputStream inputStream) throws IOException {
-        Properties props = new Properties();
-        props.load(inputStream);
-        return props;
-    }
+  /**
+   * load properties from InputStream
+   */
+  public static Properties loadFromInputStream(InputStream inputStream) throws IOException {
+    Properties props = new Properties();
+    props.load(inputStream);
+    return props;
+  }
 
-    public static Properties loadFromResources(String filename) throws IOException {
-        InputStream inputStream = ClassLoader.getSystemResourceAsStream(filename);
+  public static Properties loadFromResources(String filename) throws IOException {
+    InputStream inputStream = ClassLoader.getSystemResourceAsStream(filename);
 
-        Properties props = new Properties();
-        props.load(inputStream);
-        return props;
-    }
+    Properties props = new Properties();
+    props.load(inputStream);
+    return props;
+  }
 
-    /**
-     * load properties from url
-     *
-     * @param url
-     * @return
-     * @throws IOException
-     */
-    public static Properties loadFromUrl(String url) throws IOException {
-        URL u = new URL(url);
-        InputStream inputStream = u.openStream();
+  /**
+   * load properties from url
+   */
+  public static Properties loadFromUrl(String url) throws IOException {
+    URL u = new URL(url);
+    InputStream inputStream = u.openStream();
 
-        Properties props = new Properties();
-        props.load(inputStream);
-        return props;
-    }
+    Properties props = new Properties();
+    props.load(inputStream);
+    return props;
+  }
 }

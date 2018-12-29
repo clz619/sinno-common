@@ -1,8 +1,7 @@
 package win.sinno.common.util;
 
-import sun.misc.Unsafe;
-
 import java.lang.reflect.Field;
+import sun.misc.Unsafe;
 
 /**
  * @author : admin@chenlizhong.cn
@@ -11,11 +10,11 @@ import java.lang.reflect.Field;
  */
 public class UnsafeUtil {
 
-    public static Unsafe getUnsafe() throws IllegalAccessException, NoSuchFieldException {
-        Field f = Unsafe.class.getDeclaredField("theUnsafe");
-        f.setAccessible(true);
+  public static Unsafe getUnsafe() throws IllegalAccessException, NoSuchFieldException {
+    Field f = Unsafe.class.getDeclaredField("theUnsafe");
+    f.setAccessible(true);
 
-        return (Unsafe) f.get(null);
-    }
+    return (Unsafe) f.get(null);
+  }
 
 }

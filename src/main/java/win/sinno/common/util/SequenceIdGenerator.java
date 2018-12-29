@@ -12,48 +12,48 @@ import java.util.Map;
  */
 public final class SequenceIdGenerator {
 
-    private String name;
+  private String name;
 
-    private int curSeqId = 0;
+  private int curSeqId = 0;
 
-    public static final int maxSeqId = Integer.MAX_VALUE;
+  public static final int maxSeqId = Integer.MAX_VALUE;
 
-    private static final Map<String, SequenceIdGenerator> CACHE = new HashMap<String, SequenceIdGenerator>();
+  private static final Map<String, SequenceIdGenerator> CACHE = new HashMap<String, SequenceIdGenerator>();
 
-    public static SequenceIdGenerator getInstance(String name) {
+  public static SequenceIdGenerator getInstance(String name) {
 
-        SequenceIdGenerator sequenceIdGenerator = CACHE.get(name);
+    SequenceIdGenerator sequenceIdGenerator = CACHE.get(name);
+
+    if (sequenceIdGenerator == null) {
+
+      synchronized (CACHE) {
+        sequenceIdGenerator = CACHE.get(name);
 
         if (sequenceIdGenerator == null) {
-
-            synchronized (CACHE) {
-                sequenceIdGenerator = CACHE.get(name);
-
-                if (sequenceIdGenerator == null) {
-                    sequenceIdGenerator = new SequenceIdGenerator(name);
-                    CACHE.put(name, sequenceIdGenerator);
-                }
-            }
+          sequenceIdGenerator = new SequenceIdGenerator(name);
+          CACHE.put(name, sequenceIdGenerator);
         }
-
-        return sequenceIdGenerator;
+      }
     }
 
-    private SequenceIdGenerator(String name) {
-        this.name = name;
+    return sequenceIdGenerator;
+  }
+
+  private SequenceIdGenerator(String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public synchronized int nextSeqId() {
+    if (curSeqId == maxSeqId) {
+      curSeqId = 0;
     }
 
-    public String getName() {
-        return name;
-    }
+    curSeqId++;
 
-    public synchronized int nextSeqId() {
-        if (curSeqId == maxSeqId) {
-            curSeqId = 0;
-        }
-
-        curSeqId++;
-
-        return curSeqId;
-    }
+    return curSeqId;
+  }
 }
