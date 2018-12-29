@@ -32,10 +32,10 @@ public final class IdWorker {
   private long lastTimestamp = -1L;
 
   public IdWorker(final long workerId) {
-    if (workerId > this.maxWorkerId || workerId < 0) {
+    if (workerId > maxWorkerId || workerId < 0) {
       throw new IllegalArgumentException(String.format(
           "worker Id can't be greater than %d or less than 0",
-          this.maxWorkerId));
+          maxWorkerId));
     }
     this.workerId = workerId;
   }
@@ -48,7 +48,7 @@ public final class IdWorker {
     long timestamp = this.timeGen();
 
     if (this.lastTimestamp == timestamp) {
-      this.sequence = (this.sequence + 1) & this.sequenceMask;
+      this.sequence = (this.sequence + 1) & sequenceMask;
 
       if (this.sequence == 0) {
         timestamp = this.tilNextMillis(this.lastTimestamp);
@@ -73,14 +73,13 @@ public final class IdWorker {
 
     //生成id
     long nextId = ((timestamp - twepoch << timestampLeftShift))
-        | (this.workerId << this.workerIdShift) | (this.sequence);
+        | (this.workerId << workerIdShift) | (this.sequence);
 
     return nextId;
   }
 
   /**
-   * @param lastTimestamp
-   * @return
+   *
    */
   private long tilNextMillis(final long lastTimestamp) {
     long timestamp = this.timeGen();
