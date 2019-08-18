@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
+import win.sinno.common.util.model.Person;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +34,18 @@ public class JsonUtilTest {
         String a = JSONArray.toJSONString(rets);
         System.out.println(a);
 
+    }
+
+    @Test
+    public void add() {
+
+        Person person=new Person("ab", "ck121", 18);
+        person.set_id("2");
+
+        System.out.println(JsonUtil.toJsonNonNull(person));
+
+        String a = JSONArray.toJSONString(person);
+        System.out.println(a);
     }
 
     class Temp {

@@ -12,7 +12,7 @@
 
   <groupId>win.sinno</groupId>
   <artifactId>sinno-common</artifactId>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
 
   <packaging>jar</packaging>
 
@@ -23,6 +23,7 @@
     1.0.5 : add atmoic cycle interger
     1.0.6 : add http
     1.0.7 : mod json util
+    1.0.8 : upgrade jar version
   </description>
 
   <properties>
@@ -31,27 +32,22 @@
     <version.junit>4.12</version.junit>
 
     <!--jackson-->
-    <version.jackson.databind>2.8.6</version.jackson.databind>
+    <version.jackson.databind>2.9.9.3</version.jackson.databind>
 
     <!--common-->
-    <version.commons.lang3>3.4</version.commons.lang3>
-    <version.commons.collections4>4.1</version.commons.collections4>
+    <version.commons.lang3>3.9</version.commons.lang3>
+    <version.commons.collections4>4.4</version.commons.collections4>
     <commons.io.version>2.6</commons.io.version>
     <!--log-->
-    <version.slf4j.log4j12>1.7.22</version.slf4j.log4j12>
+    <version.slf4j.log4j12>1.7.28</version.slf4j.log4j12>
 
-    <httpclient.version>4.5.3</httpclient.version>
+    <httpclient.version>4.5.9</httpclient.version>
 
-    <lombok.version>1.16.18</lombok.version>
-    <fastjson.version>1.2.4</fastjson.version>
-    <guava.version>25.0-jre</guava.version>
+    <lombok.version>1.18.8</lombok.version>
+    <fastjson.version>1.2.59</fastjson.version>
+    <guava.version>28.0-jre</guava.version>
 
     <pinyin4j.version>2.5.1</pinyin4j.version>
-    <!--plugin-->
-    <version.plugin.maven.compiler>3.5.1</version.plugin.maven.compiler>
-
-    <version.maven.jar>3.0.2</version.maven.jar>
-    <version.maven.dependency>2.10</version.maven.dependency>
 
   </properties>
 
