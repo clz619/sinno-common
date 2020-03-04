@@ -32,7 +32,7 @@
     <version.junit>4.12</version.junit>
 
     <!--jackson-->
-    <version.jackson.databind>2.9.9.3</version.jackson.databind>
+    <version.jackson.databind>2.9.10.3</version.jackson.databind>
 
     <!--common-->
     <version.commons.lang3>3.9</version.commons.lang3>
