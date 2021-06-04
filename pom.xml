@@ -41,7 +41,7 @@
     <!--log-->
     <version.slf4j.log4j12>1.7.28</version.slf4j.log4j12>
 
-    <httpclient.version>4.5.9</httpclient.version>
+    <httpclient.version>4.5.13</httpclient.version>
 
     <lombok.version>1.18.8</lombok.version>
     <fastjson.version>1.2.59</fastjson.version>
